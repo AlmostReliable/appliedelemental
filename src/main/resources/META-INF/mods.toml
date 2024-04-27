@@ -1,0 +1,42 @@
+modLoader = "javafml"
+loaderVersion = "[2,)"
+issueTrackerURL = "https://github.com/${githubUser}/${githubRepo}/issues"
+license = "${license}"
+
+[[mixins]]
+config = "${modId}.mixins.json"
+
+[[mods]]
+modId = "${modId}"
+version = "${version}"
+displayName = "${modName}"
+authors = "${modAuthor}"
+description = '''${modDescription}'''
+
+[[dependencies."${modId}"]]
+modId = "neoforge"
+type = "REQUIRED"
+versionRange = "[${neoVersion},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies."${modId}"]]
+modId = "minecraft"
+type = "REQUIRED"
+versionRange = "[${mcVersion},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies."${modId}"]]
+modId = "ae2"
+type = "REQUIRED"
+versionRange = "[${aeVersion},)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies."${modId}"]]
+modId = "elementalcraft"
+type = "REQUIRED"
+versionRange = "[${elementalVersion},)"
+ordering = "AFTER"
+side = "BOTH"
