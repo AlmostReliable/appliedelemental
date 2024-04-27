@@ -34,6 +34,15 @@ base {
     archivesName.set("$modId-neoforge")
 }
 
+sourceSets {
+    main {
+        resources {
+            srcDir(file("src/main/generated"))
+            exclude("**/.cache")
+        }
+    }
+}
+
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 val commonSystemProperties = mapOf(
@@ -53,6 +62,10 @@ runs {
 
     create("client") {
         programArguments("--quickPlaySingleplayer", "New World")
+    }
+    create("data") {
+        programArguments("--all", "--mod", modId)
+        programArguments("--output", file("src/main/generated").absolutePath)
     }
     create("guide") {
         configure("client")
