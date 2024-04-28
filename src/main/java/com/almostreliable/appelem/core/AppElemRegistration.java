@@ -5,6 +5,7 @@ import appeng.api.client.AEKeyRendering;
 import appeng.api.client.StorageCellModels;
 import appeng.api.stacks.AEKeyTypes;
 import appeng.api.storage.StorageCells;
+import appeng.items.storage.BasicStorageCell;
 import com.almostreliable.appelem.AppElem;
 import com.almostreliable.appelem.element.ElementCellGuiHandler;
 import com.almostreliable.appelem.element.ElementContainerStrategy;
@@ -17,6 +18,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
 public final class AppElemRegistration {
@@ -58,17 +60,16 @@ public final class AppElemRegistration {
 
             StorageCells.addCellGuiHandler(new ElementCellGuiHandler());
 
-            StorageCellModels.registerModel(AppElemItems.ELEMENT_CELL_1K, AppElem.id("cells/1k_element_cell"));
-            StorageCellModels.registerModel(AppElemItems.ELEMENT_CELL_4K, AppElem.id("cells/4k_element_cell"));
-            StorageCellModels.registerModel(AppElemItems.ELEMENT_CELL_16K, AppElem.id("cells/16k_element_cell"));
-            StorageCellModels.registerModel(AppElemItems.ELEMENT_CELL_64K, AppElem.id("cells/64k_element_cell"));
-            StorageCellModels.registerModel(AppElemItems.ELEMENT_CELL_256K, AppElem.id("cells/256k_element_cell"));
-
-            StorageCellModels.registerModel(AppElemItems.PORTABLE_ELEMENT_CELL_1K, AppElem.id("cells/1k_element_cell"));
-            StorageCellModels.registerModel(AppElemItems.PORTABLE_ELEMENT_CELL_4K, AppElem.id("cells/4k_element_cell"));
-            StorageCellModels.registerModel(AppElemItems.PORTABLE_ELEMENT_CELL_16K, AppElem.id("cells/16k_element_cell"));
-            StorageCellModels.registerModel(AppElemItems.PORTABLE_ELEMENT_CELL_64K, AppElem.id("cells/64k_element_cell"));
-            StorageCellModels.registerModel(AppElemItems.PORTABLE_ELEMENT_CELL_256K, AppElem.id("cells/256k_element_cell"));
+            for (var cell : AppElemItems.getCells()) {
+                String path = cell.getId().getPath();
+                String tier = path.substring(path.lastIndexOf('_') + 1);
+                StorageCellModels.registerModel(cell, AppElem.id("block/" + tier + "_element_cell"));
+            }
+            for (var portableCell : AppElemItems.getPortableCells()) {
+                String path = portableCell.getId().getPath();
+                String tier = path.substring(path.lastIndexOf('_') + 1);
+                StorageCellModels.registerModel(portableCell, AppElem.id("block/" + tier + "_element_cell"));
+            }
         }
     }
 }

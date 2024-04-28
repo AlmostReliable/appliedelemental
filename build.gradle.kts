@@ -66,6 +66,8 @@ runs {
     create("data") {
         programArguments("--all", "--mod", modId)
         programArguments("--output", file("src/main/generated").absolutePath)
+        programArguments("--existing", file("src/main/resources").absolutePath)
+        programArguments("--existing-mod", "ae2")
     }
     create("guide") {
         configure("client")

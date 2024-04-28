@@ -26,7 +26,7 @@ public final class AppElemTab {
     static void register(RegisterEvent registerEvent) {
         CreativeModeTab tab = CreativeModeTab.builder()
             .title(Utils.translate("tab", "main"))
-            .icon(Items.ACACIA_BOAT::getDefaultInstance)
+            .icon(AppElemItems.ELEMENT_CELL_HOUSING::toStack)
             .build();
 
         registerEvent.register(Registries.CREATIVE_MODE_TAB, KEY.location(), () -> tab);
