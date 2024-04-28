@@ -25,13 +25,4 @@ public final class Utils {
     public static MutableComponent translate(String type, String key, Object... args) {
         return Component.translatable(String.format("%s.%s.%s", type, BuildConfig.MOD_ID, key), args);
     }
-
-    @Nullable
-    public static IElementStorage getItemElementStorage(ItemStack stack) {
-        if (stack.getItem() instanceof AbstractElementHolderItem elementHolderItem) {
-            return elementHolderItem.getElementStorage(stack);
-        }
-
-        return null;
-    }
 }

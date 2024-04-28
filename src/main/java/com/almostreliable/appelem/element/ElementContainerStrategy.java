@@ -13,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.common.SoundActions;
 import org.jetbrains.annotations.Nullable;
+import sirttas.elementalcraft.api.capability.ElementalCraftCapabilities;
 import sirttas.elementalcraft.api.element.ElementType;
 import sirttas.elementalcraft.api.element.storage.IElementStorage;
 import sirttas.elementalcraft.item.holder.AbstractElementHolderItem;
@@ -23,10 +24,13 @@ public class ElementContainerStrategy implements ContainerItemStrategy<ElementKe
     @Nullable
     @Override
     public GenericStack getContainedStack(ItemStack stack) {
-        IElementStorage elementStorage = Utils.getItemElementStorage(stack);
+        if (stack.isEmpty()) return null;
+
+        IElementStorage elementStorage = stack.getCapability(ElementalCraftCapabilities.ElementStorage.ITEM);
         if (elementStorage == null) return null;
 
         for (ElementType elementType : ElementType.values()) {
+            if (elementType == ElementType.NONE) continue;
             int canExtract = elementStorage.extractElement(Integer.MAX_VALUE, elementType, true);
             if (canExtract <= 0) continue;
             return new GenericStack(new ElementKey(elementType), canExtract);
@@ -38,7 +42,7 @@ public class ElementContainerStrategy implements ContainerItemStrategy<ElementKe
     @Nullable
     @Override
     public Context findCarriedContext(Player player, AbstractContainerMenu menu) {
-        if (menu.getCarried().getItem() instanceof AbstractElementHolderItem) {
+        if (menu.getCarried().getCapability(ElementalCraftCapabilities.ElementStorage.ITEM) != null) {
             return new CarriedContext(player, menu);
         }
 
@@ -47,7 +51,7 @@ public class ElementContainerStrategy implements ContainerItemStrategy<ElementKe
 
     @Override
     public @Nullable Context findPlayerSlotContext(Player player, int slot) {
-        if (player.getInventory().getItem(slot).getItem() instanceof AbstractElementHolderItem) {
+        if (player.getInventory().getItem(slot).getCapability(ElementalCraftCapabilities.ElementStorage.ITEM) != null) {
             return new PlayerInvContext(player, slot);
         }
 
@@ -59,7 +63,7 @@ public class ElementContainerStrategy implements ContainerItemStrategy<ElementKe
         ItemStack stack = context.getStack();
         ItemStack copy = stack.copy();
 
-        IElementStorage elementStorage = Utils.getItemElementStorage(copy);
+        IElementStorage elementStorage = stack.getCapability(ElementalCraftCapabilities.ElementStorage.ITEM);
         if (elementStorage == null) return 0;
 
         int extracted = elementStorage.extractElement(Ints.saturatedCast(amount), (ElementType) what.getPrimaryKey(), mode.isSimulate());
@@ -76,7 +80,7 @@ public class ElementContainerStrategy implements ContainerItemStrategy<ElementKe
         ItemStack stack = context.getStack();
         ItemStack copy = stack.copy();
 
-        IElementStorage elementStorage = Utils.getItemElementStorage(copy);
+        IElementStorage elementStorage = stack.getCapability(ElementalCraftCapabilities.ElementStorage.ITEM);
         if (elementStorage == null) return 0;
 
         int inserted = Ints.saturatedCast(amount) -
