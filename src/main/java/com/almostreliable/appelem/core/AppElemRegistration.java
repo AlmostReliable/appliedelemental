@@ -1,24 +1,19 @@
 package com.almostreliable.appelem.core;
 
 import appeng.api.behaviors.ContainerItemStrategy;
+import appeng.api.behaviors.ExternalStorageStrategy;
 import appeng.api.client.AEKeyRendering;
 import appeng.api.client.StorageCellModels;
 import appeng.api.stacks.AEKeyTypes;
 import appeng.api.storage.StorageCells;
-import appeng.items.storage.BasicStorageCell;
 import com.almostreliable.appelem.AppElem;
-import com.almostreliable.appelem.element.ElementCellGuiHandler;
-import com.almostreliable.appelem.element.ElementContainerStrategy;
-import com.almostreliable.appelem.element.ElementKey;
-import com.almostreliable.appelem.element.ElementKeyType;
-import com.almostreliable.appelem.element.ElementRenderer;
+import com.almostreliable.appelem.element.*;
 import com.almostreliable.appelem.network.PacketHandler;
 import net.minecraft.core.registries.Registries;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
 public final class AppElemRegistration {
@@ -39,18 +34,21 @@ public final class AppElemRegistration {
         }
     }
 
-    @SuppressWarnings("UnstableApiUsage")
     private static void onRegisterEvent(RegisterEvent event) {
         if (event.getRegistryKey() == Registries.CREATIVE_MODE_TAB) {
             AppElemTab.register(event);
         }
         if (event.getRegistryKey() == Registries.ITEM) {
-            AEKeyTypes.register(ElementKeyType.INSTANCE);
-            ContainerItemStrategy.register(ElementKeyType.INSTANCE, ElementKey.class, new ElementContainerStrategy());
+            registerElementKey();
         }
     }
 
     private static void registerCapabilities(RegisterCapabilitiesEvent event) {
+    }
+
+    private static void registerElementKey() {
+        AEKeyTypes.register(ElementKeyType.INSTANCE);
+        ElementStrategies.register();
     }
 
     private static class AppElemClientRegistration {
