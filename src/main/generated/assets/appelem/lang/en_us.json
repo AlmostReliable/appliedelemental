@@ -1,4 +1,5 @@
 {
+  "block.appelem.network_element_container": "Network Element Container",
   "element.appelem.air": "Air Element",
   "element.appelem.earth": "Earth Element",
   "element.appelem.fire": "Fire Element",
@@ -9,6 +10,7 @@
   "item.appelem.element_storage_cell_256k": "256k ME Element Storage Cell",
   "item.appelem.element_storage_cell_4k": "4k ME Element Storage Cell",
   "item.appelem.element_storage_cell_64k": "64k ME Element Storage Cell",
+  "item.appelem.network_element_container": "Network Element Container",
   "item.appelem.portable_element_cell_16k": "16k Portable Element Cell",
   "item.appelem.portable_element_cell_1k": "1k Portable Element Cell",
   "item.appelem.portable_element_cell_256k": "256k Portable Element Cell",

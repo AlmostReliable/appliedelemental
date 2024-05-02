@@ -26,7 +26,7 @@ public final class AppElemRegistration {
         modEventBus.addListener(AppElemTab::registerContents);
         modEventBus.addListener(PacketHandler::registerPackets);
 
-//        AppElemBlocks.REGISTRY.register(modEventBus);
+        AppElemBlocks.REGISTRY.register(modEventBus);
         AppElemItems.REGISTRY.register(modEventBus);
 
         if (FMLEnvironment.dist.isClient()) {

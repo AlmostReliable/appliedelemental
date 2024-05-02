@@ -15,7 +15,6 @@ public final class DataGeneration {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
         generator.addProvider(event.includeClient(), new AppElemLang(output));
-        generator.addProvider(event.includeClient(), new AppElemBlockModels(output, existingFileHelper));
-        generator.addProvider(event.includeClient(), new AppElemItemModels(output, existingFileHelper));
+        generator.addProvider(event.includeClient(), new AppElemModels(output, existingFileHelper));
     }
 }

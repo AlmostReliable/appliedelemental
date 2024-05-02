@@ -1,13 +1,16 @@
 package com.almostreliable.appelem.core;
 
+import appeng.decorative.AEDecorativeBlock;
 import com.almostreliable.appelem.BuildConfig;
 import com.almostreliable.appelem.Utils;
+import com.almostreliable.appelem.block.NetworkElementContainerBlock;
 import com.almostreliable.appelem.data.AppElemLang;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.Nullable;
+import sirttas.elementalcraft.property.ECProperties;
 
 import java.util.function.Supplier;
 
@@ -17,19 +20,7 @@ public final class AppElemBlocks {
 
     // @formatter:off
 
-//    // decorative blocks
-//    public static final DeferredBlock<AEDecorativeBlock> RESONATING_BLOCK = register("resonating_block", () -> new AEDecorativeBlock(RESONATING_PROPS));
-//
-//    // resonating budding blocks
-//    public static final DeferredBlock<ResonatingBuddingBlock> DAMAGED_RESONATING_BUDDING_BLOCK = register("damaged_resonating_budding_block", () -> new ResonatingBuddingBlock(RESONATING_PROPS));
-//    public static final DeferredBlock<ResonatingBuddingBlock> CHIPPED_RESONATING_BUDDING_BLOCK = register("chipped_resonating_budding_block", () -> new ResonatingBuddingBlock(RESONATING_PROPS));
-//    public static final DeferredBlock<ResonatingBuddingBlock> FLAWED_RESONATING_BUDDING_BLOCK = register("flawed_resonating_budding_block", () -> new ResonatingBuddingBlock(RESONATING_PROPS));
-//
-//    // resonating buds and crystal cluster
-//    public static final DeferredBlock<ResonatingClusterBlock> SMALL_RESONATING_BUD = register("small_resonating_bud", () -> new ResonatingClusterBlock(3, 4, RESONATING_PROPS));
-//    public static final DeferredBlock<ResonatingClusterBlock> MEDIUM_RESONATING_BUD = register("medium_resonating_bud", () -> new ResonatingClusterBlock(4, 3, RESONATING_PROPS));
-//    public static final DeferredBlock<ResonatingClusterBlock> LARGE_RESONATING_BUD = register("large_resonating_bud", () -> new ResonatingClusterBlock(5, 3, RESONATING_PROPS));
-//    public static final DeferredBlock<ResonatingClusterBlock> RESONATING_CLUSTER = register("resonating_cluster", () -> new ResonatingClusterBlock(7, 3, RESONATING_PROPS));
+    public static final DeferredBlock<NetworkElementContainerBlock> NETWORK_CONTAINER = register("network_element_container", () -> new NetworkElementContainerBlock(ECProperties.Blocks.CONTAINER));
 
     // @formatter:on
 
