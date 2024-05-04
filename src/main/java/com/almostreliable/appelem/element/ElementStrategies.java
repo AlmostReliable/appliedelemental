@@ -184,7 +184,7 @@ public final class ElementStrategies {
     @SuppressWarnings("ClassEscapesDefinedScope")
     public static final class ElementContainerStrategy implements ContainerItemStrategy<ElementKey, ElementContainerStrategy.Context> {
 
-        public static final ElementContainerStrategy INSTANCE = new ElementContainerStrategy();
+        private static final ElementContainerStrategy INSTANCE = new ElementContainerStrategy();
 
         private ElementContainerStrategy() {}
 
@@ -225,10 +225,10 @@ public final class ElementStrategies {
             ItemStack stack = context.getStack();
             ItemStack copy = stack.copyWithCount(1);
 
-            IElementStorage elementStorage = copy.getCapability(ElementalCraftCapabilities.ElementStorage.ITEM);
-            if (elementStorage == null) return 0;
+            IElementStorage handler = copy.getCapability(ElementalCraftCapabilities.ElementStorage.ITEM);
+            if (handler == null) return 0;
 
-            int extracted = elementStorage.extractElement(Ints.saturatedCast(amount), (ElementType) what.getPrimaryKey(), mode.isSimulate());
+            int extracted = handler.extractElement(Ints.saturatedCast(amount), (ElementType) what.getPrimaryKey(), mode.isSimulate());
             if (mode == Actionable.MODULATE) {
                 stack.shrink(1);
                 context.addOverflow(copy);
@@ -242,10 +242,10 @@ public final class ElementStrategies {
             ItemStack stack = context.getStack();
             ItemStack copy = stack.copyWithCount(1);
 
-            IElementStorage elementStorage = copy.getCapability(ElementalCraftCapabilities.ElementStorage.ITEM);
-            if (elementStorage == null) return 0;
+            IElementStorage handler = copy.getCapability(ElementalCraftCapabilities.ElementStorage.ITEM);
+            if (handler == null) return 0;
 
-            int notInserted = elementStorage.insertElement(Ints.saturatedCast(amount), (ElementType) what.getPrimaryKey(), mode.isSimulate());
+            int notInserted = handler.insertElement(Ints.saturatedCast(amount), (ElementType) what.getPrimaryKey(), mode.isSimulate());
 
             if (mode == Actionable.MODULATE) {
                 stack.shrink(1);

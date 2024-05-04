@@ -2,10 +2,7 @@ package com.almostreliable.appelem;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
-import sirttas.elementalcraft.api.element.storage.IElementStorage;
-import sirttas.elementalcraft.item.holder.AbstractElementHolderItem;
 
 public final class Utils {
 

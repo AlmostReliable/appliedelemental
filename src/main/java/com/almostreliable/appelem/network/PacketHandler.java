@@ -21,20 +21,20 @@ public final class PacketHandler {
         IPayloadRegistrar registrar = event.registrar(BuildConfig.MOD_ID).versioned(PROTOCOL);
 
         // server to client
-//        registerPacket(
-//            registrar,
-//            RequesterSyncPacket.ID,
-//            RequesterSyncPacket::decode,
-//            builder -> builder.client(PacketHandler::handlePacket)
-//        );
+        //        registerPacket(
+        //            registrar,
+        //            RequesterSyncPacket.ID,
+        //            RequesterSyncPacket::decode,
+        //            builder -> builder.client(PacketHandler::handlePacket)
+        //        );
 
         // client to server
-//        registerPacket(
-//            registrar,
-//            RequestUpdatePacket.ID,
-//            RequestUpdatePacket::decode,
-//            builder -> builder.server(PacketHandler::handlePacket)
-//        );
+        //        registerPacket(
+        //            registrar,
+        //            RequestUpdatePacket.ID,
+        //            RequestUpdatePacket::decode,
+        //            builder -> builder.server(PacketHandler::handlePacket)
+        //        );
     }
 
     private static <P extends Packet> void registerPacket(

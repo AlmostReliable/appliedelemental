@@ -1,7 +1,5 @@
 package com.almostreliable.appelem.core;
 
-import appeng.api.behaviors.ContainerItemStrategy;
-import appeng.api.behaviors.ExternalStorageStrategy;
 import appeng.api.client.AEKeyRendering;
 import appeng.api.client.StorageCellModels;
 import appeng.api.stacks.AEKeyTypes;

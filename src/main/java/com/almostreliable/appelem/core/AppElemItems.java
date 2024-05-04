@@ -8,8 +8,8 @@ import appeng.items.tools.powered.PortableCellItem;
 import appeng.menu.me.common.MEStorageMenu;
 import com.almostreliable.appelem.BuildConfig;
 import com.almostreliable.appelem.Utils;
-import com.almostreliable.appelem.element.ElementKeyType;
 import com.almostreliable.appelem.data.AppElemLang;
+import com.almostreliable.appelem.element.ElementKeyType;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -82,7 +82,9 @@ public final class AppElemItems {
             return deferredItem;
         }
 
-        private DeferredItem<PortableCellItem> registerPortableCell(String id, String name, Function<Item.Properties, PortableCellItem> factory) {
+        private DeferredItem<PortableCellItem> registerPortableCell(
+            String id, String name, Function<Item.Properties, PortableCellItem> factory
+        ) {
             var deferredItem = register(id, name, factory);
             PORTABLE_CELLS.add(deferredItem);
             return deferredItem;

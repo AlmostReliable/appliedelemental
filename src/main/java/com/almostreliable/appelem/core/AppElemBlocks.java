@@ -1,6 +1,5 @@
 package com.almostreliable.appelem.core;
 
-import appeng.decorative.AEDecorativeBlock;
 import com.almostreliable.appelem.BuildConfig;
 import com.almostreliable.appelem.Utils;
 import com.almostreliable.appelem.block.NetworkElementContainerBlock;

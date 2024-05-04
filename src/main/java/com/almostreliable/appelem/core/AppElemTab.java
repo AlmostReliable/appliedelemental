@@ -1,14 +1,13 @@
 package com.almostreliable.appelem.core;
 
-import com.almostreliable.appelem.BuildConfig;
 import com.almostreliable.appelem.AppElem;
+import com.almostreliable.appelem.BuildConfig;
 import com.almostreliable.appelem.Utils;
 import com.almostreliable.appelem.data.AppElemLang;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.RegisterEvent;

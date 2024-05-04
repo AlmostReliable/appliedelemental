@@ -4,9 +4,15 @@ import appeng.api.stacks.GenericStack;
 import sirttas.elementalcraft.api.element.ElementType;
 import sirttas.elementalcraft.api.element.storage.IElementStorage;
 
+/**
+ * Utility class to get the first available element from an {@link IElementStorage}.
+ *
+ * @param elementType The element type that was found.
+ * @param amount The amount of the element that was found.
+ */
 record ElementStack(ElementType elementType, int amount) {
 
-    static final ElementStack EMPTY = new ElementStack(ElementType.NONE, 0);
+    private static final ElementStack EMPTY = new ElementStack(ElementType.NONE, 0);
 
     static ElementStack of(IElementStorage handler) {
         if (handler.isEmpty()) return EMPTY;
