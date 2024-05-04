@@ -98,11 +98,21 @@ dependencies {
 
     // Recipe Viewers
     when (recipeViewer) {
-        "jei" -> runtimeOnly("mezz.jei:jei-$mcVersion-neoforge:$jeiVersion") { isTransitive = false }
-        "rei" -> runtimeOnly("me.shedaniel:RoughlyEnoughItems-neoforge:$reiVersion")
-        "emi" -> {
+        "jei" -> {
+            compileOnly("mezz.jei:jei-$mcVersion-neoforge-api:$jeiVersion") { isTransitive = false }
             runtimeOnly("mezz.jei:jei-$mcVersion-neoforge:$jeiVersion") { isTransitive = false }
-            runtimeOnly("dev.emi:emi-neoforge:$emiVersion+$mcVersion")
+            compileOnly("dev.emi:emi-neoforge:$emiVersion+$mcVersion")
+        }
+
+        "rei" -> {
+            runtimeOnly("me.shedaniel:RoughlyEnoughItems-neoforge:$reiVersion")
+            compileOnly("mezz.jei:jei-$mcVersion-neoforge-api:$jeiVersion") { isTransitive = false }
+            compileOnly("dev.emi:emi-neoforge:$emiVersion+$mcVersion")
+        }
+
+        "emi" -> {
+            implementation("dev.emi:emi-neoforge:$emiVersion+$mcVersion")
+            implementation("mezz.jei:jei-$mcVersion-neoforge:$jeiVersion") { isTransitive = false }
         }
 
         else -> throw GradleException("Invalid recipeViewer value: $recipeViewer")

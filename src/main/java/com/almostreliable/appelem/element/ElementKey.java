@@ -20,7 +20,7 @@ public class ElementKey extends AEKey {
 
     private final ElementType elementType;
 
-    ElementKey(ElementType elementType) {
+    public ElementKey(ElementType elementType) {
         this.elementType = elementType;
     }
 
