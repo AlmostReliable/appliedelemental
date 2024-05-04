@@ -17,11 +17,14 @@ public final class AppElemConfig {
 
     public static final class CommonConfig {
 
+        public final ModConfigSpec.IntValue amountPerOperation;
         public final ModConfigSpec.IntValue containerCapacity;
 
         private CommonConfig(ModConfigSpec.Builder builder) {
+            amountPerOperation = builder.comment("The amount of element handled per operation, e.g. when inserting or extracting.")
+                .defineInRange("amount_per_operation", 100, 1, 10_000);
             containerCapacity = builder.comment("The element capacity of the ME Element Container.")
-                .defineInRange("container_capacity", 100_000, 0, 100_000_000);
+                .defineInRange("container_capacity", 100_000, 1, 100_000_000);
         }
     }
 }

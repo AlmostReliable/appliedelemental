@@ -1,9 +1,6 @@
 package com.almostreliable.appelem.element;
 
-import appeng.api.behaviors.ContainerItemStrategy;
-import appeng.api.behaviors.ExternalStorageStrategy;
-import appeng.api.behaviors.StackExportStrategy;
-import appeng.api.behaviors.StackImportStrategy;
+import appeng.api.behaviors.*;
 import appeng.api.config.Actionable;
 import appeng.api.networking.security.IActionSource;
 import appeng.api.stacks.AEKey;
@@ -15,6 +12,7 @@ import appeng.parts.automation.ForgeExternalStorageStrategy;
 import appeng.parts.automation.HandlerStrategy;
 import appeng.parts.automation.StorageExportStrategy;
 import appeng.parts.automation.StorageImportStrategy;
+import com.almostreliable.appelem.core.AppElemConfig;
 import com.google.common.primitives.Ints;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -44,6 +42,7 @@ public final class ElementStrategies {
         ExternalStorageStrategy.register(ElementKeyType.INSTANCE, ElementStrategies::createExternalStorageStrategy);
         StackExportStrategy.register(ElementKeyType.INSTANCE, ElementStrategies::createStackExportStrategy);
         StackImportStrategy.register(ElementKeyType.INSTANCE, ElementStrategies::createStackImportStrategy);
+        GenericSlotCapacities.register(ElementKeyType.INSTANCE, 1_000L);
     }
 
     private static ExternalStorageStrategy createExternalStorageStrategy(ServerLevel level, BlockPos pos, Direction fromSide) {

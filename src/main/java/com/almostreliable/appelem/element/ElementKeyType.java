@@ -3,6 +3,7 @@ package com.almostreliable.appelem.element;
 import appeng.api.stacks.AEKey;
 import appeng.api.stacks.AEKeyType;
 import com.almostreliable.appelem.AppElem;
+import com.almostreliable.appelem.core.AppElemConfig;
 import com.almostreliable.appelem.data.AppElemLang;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -11,7 +12,6 @@ import sirttas.elementalcraft.api.name.ECNames;
 
 public final class ElementKeyType extends AEKeyType {
 
-    public static final int PORTION_AMOUNT = 1_000;
     public static final ElementKeyType INSTANCE = new ElementKeyType();
 
     private ElementKeyType() {
@@ -20,12 +20,12 @@ public final class ElementKeyType extends AEKeyType {
 
     @Override
     public int getAmountPerOperation() {
-        return PORTION_AMOUNT;
+        return AppElemConfig.COMMON.amountPerOperation.get();
     }
 
     @Override
     public int getAmountPerByte() {
-        return PORTION_AMOUNT * 8;
+        return AppElemConfig.COMMON.amountPerOperation.get() * 8;
     }
 
     @Override
