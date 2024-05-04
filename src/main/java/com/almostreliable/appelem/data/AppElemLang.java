@@ -16,8 +16,10 @@ import java.util.function.Supplier;
 @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
 public final class AppElemLang extends LanguageProvider {
 
+    public static final LangEntry TAB_NAME = LangEntry.of("tab", "main", BuildConfig.MOD_NAME);
+    public static final LangEntry ELEMENTAL_DESCRIPTION = LangEntry.description("elements", "Elements");
+    public static final LangEntry P2P_CAP_DESCRIPTION = LangEntry.description("p2p_cap", "Element Holder");
     public static final Map<String, LangEntry> ELEMENT_NAMES = new HashMap<>();
-    public static final LangEntry ELEMENTAL_DESCRIPTION = LangEntry.of("label", "elements", "Elements");
 
     static {
         for (ElementType elementType : ElementType.values()) {
@@ -50,6 +52,10 @@ public final class AppElemLang extends LanguageProvider {
             LangEntry entry = new LangEntry(String.format("%s.%s.%s", prefix, BuildConfig.MOD_ID, id), value);
             ENTRIES.add(entry);
             return entry;
+        }
+
+        private static LangEntry description(String id, String value) {
+            return of("description", id, value);
         }
 
         @Override

@@ -1,4 +1,4 @@
 @NonnullDefault
-package com.almostreliable.appelem.block;
+package com.almostreliable.appelem.content;
 
 import org.lwjgl.system.NonnullDefault;

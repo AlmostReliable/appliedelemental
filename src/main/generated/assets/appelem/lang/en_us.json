@@ -1,10 +1,13 @@
 {
   "block.appelem.me_element_container": "ME Element Container",
+  "description.appelem.elements": "Elements",
+  "description.appelem.p2p_cap": "Element Holder",
   "element.appelem.air": "Air Element",
   "element.appelem.earth": "Earth Element",
   "element.appelem.fire": "Fire Element",
   "element.appelem.water": "Water Element",
   "item.appelem.element_cell_housing": "ME Element Cell Housing",
+  "item.appelem.element_p2p_tunnel": "Element P2P Tunnel",
   "item.appelem.element_storage_cell_16k": "16k ME Element Storage Cell",
   "item.appelem.element_storage_cell_1k": "1k ME Element Storage Cell",
   "item.appelem.element_storage_cell_256k": "256k ME Element Storage Cell",
@@ -16,6 +19,5 @@
   "item.appelem.portable_element_cell_256k": "256k Portable Element Cell",
   "item.appelem.portable_element_cell_4k": "4k Portable Element Cell",
   "item.appelem.portable_element_cell_64k": "64k Portable Element Cell",
-  "label.appelem.elements": "Elements",
   "tab.appelem.main": "Applied Elemental"
 }

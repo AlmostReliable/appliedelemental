@@ -16,5 +16,7 @@ public final class DataGeneration {
 
         generator.addProvider(event.includeClient(), new AppElemLang(output));
         generator.addProvider(event.includeClient(), new AppElemModels(output, existingFileHelper));
+
+        AppElemTags.initTagProviders(event);
     }
 }

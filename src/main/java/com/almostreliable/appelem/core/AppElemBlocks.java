@@ -1,7 +1,7 @@
 package com.almostreliable.appelem.core;
 
 import com.almostreliable.appelem.BuildConfig;
-import com.almostreliable.appelem.block.MeElementContainerBlock;
+import com.almostreliable.appelem.content.MeElementContainerBlock;
 import com.almostreliable.appelem.data.AppElemLang;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;

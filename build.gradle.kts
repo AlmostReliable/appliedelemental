@@ -66,6 +66,7 @@ runs {
         programArguments("--output", file("src/main/generated").absolutePath)
         programArguments("--existing", file("src/main/resources").absolutePath)
         programArguments("--existing-mod", "ae2")
+        programArguments("--existing-mod", "elementalcraft")
     }
     create("guide") {
         configure("client")

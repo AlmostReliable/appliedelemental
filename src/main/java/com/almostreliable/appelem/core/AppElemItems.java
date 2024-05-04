@@ -1,12 +1,18 @@
 package com.almostreliable.appelem.core;
 
+import appeng.api.parts.IPartItem;
+import appeng.api.parts.PartModels;
 import appeng.core.definitions.AEItems;
 import appeng.items.materials.MaterialItem;
+import appeng.items.parts.PartItem;
+import appeng.items.parts.PartModelsHelper;
 import appeng.items.storage.BasicStorageCell;
 import appeng.items.storage.StorageTier;
 import appeng.items.tools.powered.PortableCellItem;
 import appeng.menu.me.common.MEStorageMenu;
+import appeng.parts.p2p.CapabilityP2PTunnelPart;
 import com.almostreliable.appelem.BuildConfig;
+import com.almostreliable.appelem.content.ElementP2PTunnelPart;
 import com.almostreliable.appelem.data.AppElemLang;
 import com.almostreliable.appelem.element.ElementKeyType;
 import net.minecraft.world.item.Item;
@@ -46,6 +52,9 @@ public final class AppElemItems {
     public static final DeferredItem<PortableCellItem> PORTABLE_ELEMENT_CELL_64K = REGISTRY.registerPortableCell("portable_element_cell_64k", "64k Portable Element Cell", p -> new PortableCellItem(ElementKeyType.INSTANCE, 4, MEStorageMenu.PORTABLE_FLUID_CELL_TYPE, StorageTier.SIZE_64K, p.stacksTo(1), 0xFFE5_FF36));
     public static final DeferredItem<PortableCellItem> PORTABLE_ELEMENT_CELL_256K = REGISTRY.registerPortableCell("portable_element_cell_256k", "256k Portable Element Cell", p -> new PortableCellItem(ElementKeyType.INSTANCE, 4, MEStorageMenu.PORTABLE_FLUID_CELL_TYPE, StorageTier.SIZE_256K, p.stacksTo(1), 0xFFE5_FF36));
 
+    // p2p
+    public static final DeferredItem<PartItem<ElementP2PTunnelPart>> ELEMENT_P2P_TUNNEL = REGISTRY.registerP2P("element_p2p_tunnel", "Element P2P Tunnel", ElementP2PTunnelPart.class, ElementP2PTunnelPart::new);
+
     // @formatter:on
 
     private AppElemItems() {}
@@ -83,6 +92,13 @@ public final class AppElemItems {
             var deferredItem = register(id, name, factory);
             PORTABLE_CELLS.add(deferredItem);
             return deferredItem;
+        }
+
+        private <T extends CapabilityP2PTunnelPart<T, ?>> DeferredItem<PartItem<T>> registerP2P(
+            String id, String name, Class<T> clazz, Function<IPartItem<T>, T> factory
+        ) {
+            PartModels.registerModels(PartModelsHelper.createModels(clazz));
+            return register(id, name, props -> new PartItem<>(props, clazz, factory));
         }
 
         void register(IEventBus modEventBus) {

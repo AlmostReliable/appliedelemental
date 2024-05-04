@@ -1,7 +1,6 @@
 package com.almostreliable.appelem.core;
 
 import com.almostreliable.appelem.AppElem;
-import com.almostreliable.appelem.BuildConfig;
 import com.almostreliable.appelem.data.AppElemLang;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -23,7 +22,7 @@ final class AppElemTab {
 
     static void register(RegisterEvent registerEvent) {
         CreativeModeTab tab = CreativeModeTab.builder()
-            .title(AppElemLang.LangEntry.of("tab", "main", BuildConfig.MOD_NAME).get())
+            .title(AppElemLang.TAB_NAME.get())
             .icon(AppElemBlocks.CONTAINER::toStack)
             .build();
 

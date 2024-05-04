@@ -1,0 +1,48 @@
+{
+  "values": [
+    {
+      "id": "#elementalcraft:shards",
+      "required": false
+    },
+    {
+      "id": "#elementalcraft:crystals",
+      "required": false
+    },
+    {
+      "id": "#elementalcraft:lenses",
+      "required": false
+    },
+    {
+      "id": "#elementalcraft:pipes",
+      "required": false
+    },
+    {
+      "id": "elementalcraft:small_container",
+      "required": false
+    },
+    {
+      "id": "elementalcraft:container",
+      "required": false
+    },
+    {
+      "id": "elementalcraft:reservoir_air",
+      "required": false
+    },
+    {
+      "id": "elementalcraft:reservoir_earth",
+      "required": false
+    },
+    {
+      "id": "elementalcraft:reservoir_fire",
+      "required": false
+    },
+    {
+      "id": "elementalcraft:reservoir_water",
+      "required": false
+    },
+    {
+      "id": "appelem:me_element_container",
+      "required": false
+    }
+  ]
+}

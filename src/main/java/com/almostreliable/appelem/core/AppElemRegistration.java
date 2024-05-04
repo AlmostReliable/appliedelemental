@@ -2,15 +2,20 @@ package com.almostreliable.appelem.core;
 
 import appeng.api.client.AEKeyRendering;
 import appeng.api.client.StorageCellModels;
+import appeng.api.features.P2PTunnelAttunement;
+import appeng.api.parts.RegisterPartCapabilitiesEvent;
 import appeng.api.stacks.AEKeyTypes;
 import appeng.api.storage.StorageCells;
 import appeng.core.definitions.AEBlockEntities;
 import com.almostreliable.appelem.AppElem;
+import com.almostreliable.appelem.content.ElementP2PTunnelPart;
+import com.almostreliable.appelem.data.AppElemLang;
 import com.almostreliable.appelem.element.*;
 import com.almostreliable.appelem.network.PacketHandler;
 import net.minecraft.core.registries.Registries;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
@@ -23,7 +28,9 @@ public final class AppElemRegistration {
 
     public static void init(IEventBus modEventBus) {
         modEventBus.addListener(AppElemRegistration::onRegisterEvent);
+        modEventBus.addListener(AppElemRegistration::onCommonSetupEvent);
         modEventBus.addListener(AppElemRegistration::registerCapabilities);
+        modEventBus.addListener(AppElemRegistration::registerPartCapabilities);
         modEventBus.addListener(AppElemTab::registerContents);
         modEventBus.addListener(PacketHandler::registerPackets);
 
@@ -40,7 +47,8 @@ public final class AppElemRegistration {
             AppElemTab.register(event);
         }
         if (event.getRegistryKey() == Registries.ITEM) {
-            registerElementKey();
+            AEKeyTypes.register(ElementKeyType.INSTANCE);
+            ElementStrategies.register();
         }
     }
 
@@ -57,9 +65,24 @@ public final class AppElemRegistration {
         );
     }
 
-    private static void registerElementKey() {
-        AEKeyTypes.register(ElementKeyType.INSTANCE);
-        ElementStrategies.register();
+    private static void registerPartCapabilities(RegisterPartCapabilitiesEvent event) {
+        event.register(
+            ElementalCraftCapabilities.ElementStorage.BLOCK,
+            (part, ctx) -> part.getExposedApi(),
+            ElementP2PTunnelPart.class
+        );
+    }
+
+    private static void onCommonSetupEvent(FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            StorageCells.addCellGuiHandler(new ElementCellGuiHandler());
+            P2PTunnelAttunement.registerAttunementTag(AppElemItems.ELEMENT_P2P_TUNNEL);
+            P2PTunnelAttunement.registerAttunementApi(
+                AppElemItems.ELEMENT_P2P_TUNNEL,
+                ElementalCraftCapabilities.ElementStorage.ITEM,
+                AppElemLang.P2P_CAP_DESCRIPTION.get()
+            );
+        });
     }
 
     static String getNameOrFormatId(String id, @Nullable String name) {
@@ -75,21 +98,21 @@ public final class AppElemRegistration {
 
     private static class AppElemClientRegistration {
 
-        private static void onClientSetup(FMLClientSetupEvent ignoredEvent) {
-            AEKeyRendering.register(ElementKeyType.INSTANCE, ElementKey.class, new ElementRenderer());
+        private static void onClientSetup(FMLClientSetupEvent event) {
+            event.enqueueWork(() -> {
+                for (var cell : AppElemItems.getCells()) {
+                    String path = cell.getId().getPath();
+                    String tier = path.substring(path.lastIndexOf('_') + 1);
+                    StorageCellModels.registerModel(cell, AppElem.id("block/" + tier + "_element_cell"));
+                }
+                for (var portableCell : AppElemItems.getPortableCells()) {
+                    String path = portableCell.getId().getPath();
+                    String tier = path.substring(path.lastIndexOf('_') + 1);
+                    StorageCellModels.registerModel(portableCell, AppElem.id("block/" + tier + "_element_cell"));
+                }
 
-            StorageCells.addCellGuiHandler(new ElementCellGuiHandler());
-
-            for (var cell : AppElemItems.getCells()) {
-                String path = cell.getId().getPath();
-                String tier = path.substring(path.lastIndexOf('_') + 1);
-                StorageCellModels.registerModel(cell, AppElem.id("block/" + tier + "_element_cell"));
-            }
-            for (var portableCell : AppElemItems.getPortableCells()) {
-                String path = portableCell.getId().getPath();
-                String tier = path.substring(path.lastIndexOf('_') + 1);
-                StorageCellModels.registerModel(portableCell, AppElem.id("block/" + tier + "_element_cell"));
-            }
+                AEKeyRendering.register(ElementKeyType.INSTANCE, ElementKey.class, new ElementRenderer());
+            });
         }
     }
 }

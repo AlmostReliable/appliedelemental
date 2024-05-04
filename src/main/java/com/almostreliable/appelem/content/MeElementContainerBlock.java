@@ -1,4 +1,4 @@
-package com.almostreliable.appelem.block;
+package com.almostreliable.appelem.content;
 
 import com.almostreliable.appelem.core.AppElemConfig;
 import com.mojang.serialization.MapCodec;
