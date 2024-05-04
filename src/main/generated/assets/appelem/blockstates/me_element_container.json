@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "appelem:block/me_element_container"
+    }
+  }
+}

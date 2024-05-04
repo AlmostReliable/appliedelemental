@@ -12,7 +12,6 @@ import appeng.parts.automation.ForgeExternalStorageStrategy;
 import appeng.parts.automation.HandlerStrategy;
 import appeng.parts.automation.StorageExportStrategy;
 import appeng.parts.automation.StorageImportStrategy;
-import com.almostreliable.appelem.core.AppElemConfig;
 import com.google.common.primitives.Ints;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

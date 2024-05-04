@@ -7,7 +7,6 @@ import appeng.items.storage.StorageTier;
 import appeng.items.tools.powered.PortableCellItem;
 import appeng.menu.me.common.MEStorageMenu;
 import com.almostreliable.appelem.BuildConfig;
-import com.almostreliable.appelem.Utils;
 import com.almostreliable.appelem.data.AppElemLang;
 import com.almostreliable.appelem.element.ElementKeyType;
 import net.minecraft.world.item.Item;
@@ -67,13 +66,9 @@ public final class AppElemItems {
 
         <T extends Item> DeferredItem<T> register(String id, @Nullable String name, Function<Item.Properties, T> factory) {
             DeferredItem<T> deferredItem = registry.register(id, () -> factory.apply(new Item.Properties()));
-            AppElemLang.LangEntry.of("item", id, Utils.getNameOrFormatId(id, name));
+            AppElemLang.LangEntry.of("item", id, AppElemRegistration.getNameOrFormatId(id, name));
             AppElemTab.add(deferredItem);
             return deferredItem;
-        }
-
-        private DeferredItem<Item> register(String id) {
-            return register(id, null, Item::new);
         }
 
         private DeferredItem<BasicStorageCell> registerCell(String id, String name, Function<Item.Properties, BasicStorageCell> factory) {

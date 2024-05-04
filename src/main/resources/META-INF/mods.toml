@@ -3,9 +3,6 @@ loaderVersion = "[2,)"
 issueTrackerURL = "https://github.com/${githubUser}/${githubRepo}/issues"
 license = "${license}"
 
-[[mixins]]
-config = "${modId}.mixins.json"
-
 [[mods]]
 modId = "${modId}"
 version = "${version}"

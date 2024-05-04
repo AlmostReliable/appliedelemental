@@ -2,18 +2,25 @@ package com.almostreliable.appelem.block;
 
 import com.almostreliable.appelem.core.AppElemConfig;
 import com.mojang.serialization.MapCodec;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 import sirttas.elementalcraft.block.container.AbstractElementContainerBlock;
 
-public class NetworkElementContainerBlock extends AbstractElementContainerBlock {
+import java.util.List;
 
-    public static final MapCodec<NetworkElementContainerBlock> CODEC = simpleCodec(NetworkElementContainerBlock::new);
+public class MeElementContainerBlock extends AbstractElementContainerBlock {
+
+    public static final MapCodec<MeElementContainerBlock> CODEC = simpleCodec(MeElementContainerBlock::new);
 
     private static final VoxelShape BASE = box(0, 0, 0, 16, 2, 16);
     private static final VoxelShape GLASS = box(2, 2, 2, 14, 15, 14);
@@ -31,7 +38,7 @@ public class NetworkElementContainerBlock extends AbstractElementContainerBlock 
         BASE, GLASS, PILLAR_1, PILLAR_2, PILLAR_3, PILLAR_4, SOCKET, PORT_1, PORT_2, PORT_3, PORT_4
     );
 
-    public NetworkElementContainerBlock(Properties properties) {
+    public MeElementContainerBlock(Properties properties) {
         super(properties);
     }
 
@@ -49,5 +56,10 @@ public class NetworkElementContainerBlock extends AbstractElementContainerBlock 
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable BlockGetter level, List<Component> tooltip, TooltipFlag flag) {
+        tooltip.add(Component.literal("WIP").withStyle(ChatFormatting.DARK_RED));
     }
 }

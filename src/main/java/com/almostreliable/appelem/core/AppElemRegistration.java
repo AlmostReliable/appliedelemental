@@ -14,6 +14,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
+import org.jetbrains.annotations.Nullable;
 import sirttas.elementalcraft.api.capability.ElementalCraftCapabilities;
 
 public final class AppElemRegistration {
@@ -59,6 +60,17 @@ public final class AppElemRegistration {
     private static void registerElementKey() {
         AEKeyTypes.register(ElementKeyType.INSTANCE);
         ElementStrategies.register();
+    }
+
+    static String getNameOrFormatId(String id, @Nullable String name) {
+        if (name == null) {
+            String[] parts = id.split("_");
+            for (int i = 0; i < parts.length; i++) {
+                parts[i] = parts[i].substring(0, 1).toUpperCase() + parts[i].substring(1);
+            }
+            return String.join(" ", parts);
+        }
+        return name;
     }
 
     private static class AppElemClientRegistration {

@@ -1,7 +1,0 @@
-{
-  "variants": {
-    "": {
-      "model": "appelem:block/network_element_container"
-    }
-  }
-}

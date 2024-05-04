@@ -22,7 +22,7 @@ class AppElemModels extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        simpleBlockWithExistingModel(AppElemBlocks.NETWORK_CONTAINER.get());
+        simpleBlockWithExistingModel(AppElemBlocks.CONTAINER.get());
         itemModels().basicItem(AppElemItems.ELEMENT_CELL_HOUSING.get());
 
         for (var cell : AppElemItems.getCells()) {

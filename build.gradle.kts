@@ -2,7 +2,6 @@
 
 val license: String by project
 val logLevel: String by project
-val mixinDebugExport: String by project
 val recipeViewer: String by project
 val mcVersion: String by project
 val modVersion: String by project
@@ -46,10 +45,9 @@ sourceSets {
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 val commonSystemProperties = mapOf(
-        "forge.logging.console.level" to logLevel,
-        "mixin.debug.export" to mixinDebugExport,
-        "guideDev.ae2guide.sources" to file("guidebook").absolutePath,
-        "guideDev.ae2guide.sourcesNamespace" to modId
+    "forge.logging.console.level" to logLevel,
+    "guideDev.ae2guide.sources" to file("guidebook").absolutePath,
+    "guideDev.ae2guide.sourcesNamespace" to modId
 )
 
 runs {
@@ -79,7 +77,7 @@ runs {
 repositories {
     mavenWithGroup("https://maven.neoforged.net/releases", "net.neoforged") // NeoForge
     mavenWithGroup("https://modmaven.dev", "appeng") // Applied Energistics 2
-    mavenWithGroup("https://repo.elementalcraft.org/releases", "sirttas.elementalcraft", "sirttas.dpanvil") // ElementalCraft, DPAnvil (EC dependency)
+    mavenWithGroup("https://repo.elementalcraft.org/releases", "sirttas.elementalcraft", "sirttas.dpanvil") // ElementalCraft
     mavenWithGroup("https://maven.blamejared.com", "mezz.jei") // JEI
     mavenWithGroup("https://maven.shedaniel.me", "me.shedaniel") // REI
     mavenWithGroup("https://maven.terraformersmc.com", "dev.emi") // EMI
@@ -115,18 +113,18 @@ tasks {
         val resourceTargets = listOf("META-INF/mods.toml", "pack.mcmeta")
 
         val replaceProperties = mapOf(
-                "license" to license,
-                "mcVersion" to mcVersion,
-                "version" to project.version as String,
-                "modId" to modId,
-                "modName" to modName,
-                "modAuthor" to modAuthor,
-                "modDescription" to modDescription,
-                "neoVersion" to neoVersion,
-                "aeVersion" to aeVersion,
-                "elementalVersion" to elementalVersion,
-                "githubUser" to githubUser,
-                "githubRepo" to githubRepo
+            "license" to license,
+            "mcVersion" to mcVersion,
+            "version" to project.version as String,
+            "modId" to modId,
+            "modName" to modName,
+            "modAuthor" to modAuthor,
+            "modDescription" to modDescription,
+            "neoVersion" to neoVersion,
+            "aeVersion" to aeVersion,
+            "elementalVersion" to elementalVersion,
+            "githubUser" to githubUser,
+            "githubRepo" to githubRepo
         )
 
         println("[Process Resources] Replacing properties in resources: ")

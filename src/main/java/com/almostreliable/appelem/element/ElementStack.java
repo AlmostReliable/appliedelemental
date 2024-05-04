@@ -8,7 +8,7 @@ import sirttas.elementalcraft.api.element.storage.IElementStorage;
  * Utility class to get the first available element from an {@link IElementStorage}.
  *
  * @param elementType The element type that was found.
- * @param amount The amount of the element that was found.
+ * @param amount      The amount of the element that was found.
  */
 record ElementStack(ElementType elementType, int amount) {
 

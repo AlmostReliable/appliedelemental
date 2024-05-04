@@ -7,10 +7,10 @@ import net.minecraft.network.chat.MutableComponent;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import sirttas.elementalcraft.api.element.ElementType;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Supplier;
 
 @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
@@ -42,26 +42,14 @@ public final class AppElemLang extends LanguageProvider {
         }
     }
 
-    public static final class LangEntry implements Supplier<MutableComponent> {
+    public record LangEntry(String key, String value) implements Supplier<MutableComponent> {
 
-        private static final List<LangEntry> ENTRIES = new ArrayList<>();
-
-        private final String key;
-        private final String value;
-
-        private LangEntry(String key, String value) {
-            this.key = key;
-            this.value = value;
-        }
+        private static final Set<LangEntry> ENTRIES = new HashSet<>();
 
         public static LangEntry of(String prefix, String id, String value) {
             LangEntry entry = new LangEntry(String.format("%s.%s.%s", prefix, BuildConfig.MOD_ID, id), value);
             ENTRIES.add(entry);
             return entry;
-        }
-
-        private static LangEntry menu(String id, String value) {
-            return of("menu", id, value);
         }
 
         @Override
