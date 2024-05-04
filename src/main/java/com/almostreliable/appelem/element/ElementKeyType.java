@@ -25,7 +25,7 @@ public final class ElementKeyType extends AEKeyType {
 
     @Override
     public int getAmountPerByte() {
-        return AppElemConfig.COMMON.amountPerOperation.get() * 8;
+        return AppElemConfig.COMMON.amountPerByte.get();
     }
 
     @Override
