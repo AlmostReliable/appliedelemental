@@ -2,17 +2,16 @@ package com.almostreliable.appelem.core;
 
 import appeng.api.parts.IPartItem;
 import appeng.api.parts.PartModels;
-import appeng.core.definitions.AEItems;
 import appeng.items.materials.MaterialItem;
 import appeng.items.parts.PartItem;
 import appeng.items.parts.PartModelsHelper;
-import appeng.items.storage.BasicStorageCell;
 import appeng.items.storage.StorageTier;
 import appeng.items.tools.powered.PortableCellItem;
 import appeng.menu.me.common.MEStorageMenu;
 import appeng.parts.p2p.CapabilityP2PTunnelPart;
 import com.almostreliable.appelem.BuildConfig;
 import com.almostreliable.appelem.content.ElementP2PTunnelPart;
+import com.almostreliable.appelem.content.ElementStorageCell;
 import com.almostreliable.appelem.data.AppElemLang;
 import com.almostreliable.appelem.element.ElementKeyType;
 import net.minecraft.world.item.Item;
@@ -30,7 +29,7 @@ import java.util.function.Function;
 public final class AppElemItems {
 
     static final DeferredItemRegister REGISTRY = new DeferredItemRegister();
-    private static final List<DeferredItem<BasicStorageCell>> CELLS = new ArrayList<>();
+    private static final List<DeferredItem<ElementStorageCell>> CELLS = new ArrayList<>();
     private static final List<DeferredItem<PortableCellItem>> PORTABLE_CELLS = new ArrayList<>();
 
     // @formatter:off
@@ -39,11 +38,11 @@ public final class AppElemItems {
     public static final DeferredItem<MaterialItem> ELEMENT_CELL_HOUSING = REGISTRY.register("element_cell_housing", "ME Element Cell Housing", MaterialItem::new);
 
     // cells
-    public static final DeferredItem<BasicStorageCell> ELEMENT_CELL_1K = REGISTRY.registerCell("element_storage_cell_1k", "1k ME Element Storage Cell", p -> new BasicStorageCell(p.stacksTo(1), AEItems.CELL_COMPONENT_1K, ELEMENT_CELL_HOUSING, .5, 1, 8, 4, ElementKeyType.INSTANCE));
-    public static final DeferredItem<BasicStorageCell> ELEMENT_CELL_4K = REGISTRY.registerCell("element_storage_cell_4k", "4k ME Element Storage Cell", p -> new BasicStorageCell(p.stacksTo(1), AEItems.CELL_COMPONENT_4K, ELEMENT_CELL_HOUSING, 1, 4, 32, 4, ElementKeyType.INSTANCE));
-    public static final DeferredItem<BasicStorageCell> ELEMENT_CELL_16K = REGISTRY.registerCell("element_storage_cell_16k", "16k ME Element Storage Cell", p -> new BasicStorageCell(p.stacksTo(1), AEItems.CELL_COMPONENT_16K, ELEMENT_CELL_HOUSING, 1.5, 16, 128, 4, ElementKeyType.INSTANCE));
-    public static final DeferredItem<BasicStorageCell> ELEMENT_CELL_64K = REGISTRY.registerCell("element_storage_cell_64k", "64k ME Element Storage Cell", p -> new BasicStorageCell(p.stacksTo(1), AEItems.CELL_COMPONENT_64K, ELEMENT_CELL_HOUSING, 2.0, 64, 512, 4, ElementKeyType.INSTANCE));
-    public static final DeferredItem<BasicStorageCell> ELEMENT_CELL_256K = REGISTRY.registerCell("element_storage_cell_256k", "256k ME Element Storage Cell", p -> new BasicStorageCell(p.stacksTo(1), AEItems.CELL_COMPONENT_256K, ELEMENT_CELL_HOUSING, 2.5, 256, 2_048, 4, ElementKeyType.INSTANCE));
+    public static final DeferredItem<ElementStorageCell> ELEMENT_CELL_1K = REGISTRY.registerCell("element_storage_cell_1k", "1k ME Element Storage Cell", p -> new ElementStorageCell(p.stacksTo(1), StorageTier.SIZE_1K));
+    public static final DeferredItem<ElementStorageCell> ELEMENT_CELL_4K = REGISTRY.registerCell("element_storage_cell_4k", "4k ME Element Storage Cell", p -> new ElementStorageCell(p.stacksTo(1), StorageTier.SIZE_4K));
+    public static final DeferredItem<ElementStorageCell> ELEMENT_CELL_16K = REGISTRY.registerCell("element_storage_cell_16k", "16k ME Element Storage Cell", p -> new ElementStorageCell(p.stacksTo(1), StorageTier.SIZE_16K));
+    public static final DeferredItem<ElementStorageCell> ELEMENT_CELL_64K = REGISTRY.registerCell("element_storage_cell_64k", "64k ME Element Storage Cell", p -> new ElementStorageCell(p.stacksTo(1), StorageTier.SIZE_64K));
+    public static final DeferredItem<ElementStorageCell> ELEMENT_CELL_256K = REGISTRY.registerCell("element_storage_cell_256k", "256k ME Element Storage Cell", p -> new ElementStorageCell(p.stacksTo(1), StorageTier.SIZE_256K));
 
     // portable cells
     public static final DeferredItem<PortableCellItem> PORTABLE_ELEMENT_CELL_1K = REGISTRY.registerPortableCell("portable_element_cell_1k", "1k Portable Element Cell", p -> new PortableCellItem(ElementKeyType.INSTANCE, 4, MEStorageMenu.PORTABLE_FLUID_CELL_TYPE, StorageTier.SIZE_1K, p.stacksTo(1), 0xFFE5_FF36));
@@ -59,7 +58,7 @@ public final class AppElemItems {
 
     private AppElemItems() {}
 
-    public static Collection<DeferredItem<BasicStorageCell>> getCells() {
+    public static Collection<DeferredItem<ElementStorageCell>> getCells() {
         return Collections.unmodifiableCollection(CELLS);
     }
 
@@ -80,7 +79,9 @@ public final class AppElemItems {
             return deferredItem;
         }
 
-        private DeferredItem<BasicStorageCell> registerCell(String id, String name, Function<Item.Properties, BasicStorageCell> factory) {
+        private DeferredItem<ElementStorageCell> registerCell(
+            String id, String name, Function<Item.Properties, ElementStorageCell> factory
+        ) {
             var deferredItem = register(id, name, factory);
             CELLS.add(deferredItem);
             return deferredItem;

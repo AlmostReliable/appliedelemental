@@ -1,10 +1,10 @@
 package com.almostreliable.appelem.data;
 
 import appeng.core.AppEng;
-import appeng.items.storage.BasicStorageCell;
 import appeng.items.tools.powered.PortableCellItem;
 import com.almostreliable.appelem.AppElem;
 import com.almostreliable.appelem.BuildConfig;
+import com.almostreliable.appelem.content.ElementStorageCell;
 import com.almostreliable.appelem.core.AppElemBlocks;
 import com.almostreliable.appelem.core.AppElemItems;
 import net.minecraft.data.PackOutput;
@@ -45,16 +45,15 @@ class AppElemModels extends BlockStateProvider {
         simpleBlockWithItem(block, modelFile);
     }
 
-    private void cell(DeferredItem<BasicStorageCell> cell) {
-        String path = cell.getId().getPath();
-        String name = path.substring(path.lastIndexOf('_') + 1) + "_element_cell";
+    private void cell(DeferredItem<ElementStorageCell> cell) {
+        String name = cell.get().getTier().namePrefix() + "_element_cell";
         models().singleTexture(name, AppEng.makeId("block/drive/drive_cell"), "cell", AppElem.id("block/" + name));
         itemModels().basicItem(cell.get()).texture("layer1", AppEng.makeId("item/storage_cell_led"));
     }
 
     private void portableCell(DeferredItem<PortableCellItem> portableCell) {
         String path = portableCell.getId().getPath();
-        String tier = path.substring(path.lastIndexOf('_') + 1);
+        String tier = portableCell.get().getTier().namePrefix();
         itemModels().singleTexture(path, mcLoc("item/generated"), "layer0", AppEng.makeId("item/portable_cell_screen"))
             .texture("layer1", AppEng.makeId("item/portable_cell_led"))
             .texture("layer2", AppElem.id("item/portable_element_cell_housing"))

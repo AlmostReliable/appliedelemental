@@ -14,7 +14,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.data.event.GatherDataEvent;
 import sirttas.elementalcraft.block.ECBlocks;
 import sirttas.elementalcraft.tag.ECTags;
 
@@ -24,14 +23,10 @@ final class AppElemTags {
 
     private AppElemTags() {}
 
-    static void initTagProviders(GatherDataEvent event) {
-        DataGenerator generator = event.getGenerator();
-        PackOutput output = generator.getPackOutput();
-        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
-
+    static void initTagProviders(boolean run, DataGenerator generator, PackOutput output, ExistingFileHelper existingFileHelper) {
         var lookupFilter = CompletableFuture.supplyAsync(VanillaRegistries::createLookup, Util.backgroundExecutor());
-        var blockTags = generator.addProvider(event.includeServer(), new Blocks(output, lookupFilter, existingFileHelper));
-        generator.addProvider(event.includeServer(), new Items(output, lookupFilter, blockTags.contentsGetter()));
+        var blockTags = generator.addProvider(run, new Blocks(output, lookupFilter, existingFileHelper));
+        generator.addProvider(run, new Items(output, lookupFilter, blockTags.contentsGetter()));
     }
 
     private static final class Items extends ItemTagsProvider {
