@@ -4,6 +4,7 @@ import appeng.api.client.AEKeyRendering;
 import appeng.api.client.StorageCellModels;
 import appeng.api.stacks.AEKeyTypes;
 import appeng.api.storage.StorageCells;
+import appeng.core.definitions.AEBlockEntities;
 import com.almostreliable.appelem.AppElem;
 import com.almostreliable.appelem.element.*;
 import com.almostreliable.appelem.network.PacketHandler;
@@ -13,6 +14,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
+import sirttas.elementalcraft.api.capability.ElementalCraftCapabilities;
 
 public final class AppElemRegistration {
 
@@ -42,6 +44,16 @@ public final class AppElemRegistration {
     }
 
     private static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(
+            ElementalCraftCapabilities.ElementStorage.BLOCK,
+            AEBlockEntities.INTERFACE,
+            (be, ctx) -> new GenericInternalInventoryWrapper(be.getStorage())
+        );
+        event.registerBlockEntity(
+            ElementalCraftCapabilities.ElementStorage.BLOCK,
+            AEBlockEntities.PATTERN_PROVIDER,
+            (be, ctx) -> new GenericInternalInventoryWrapper(be.getLogic().getReturnInv())
+        );
     }
 
     private static void registerElementKey() {
@@ -51,7 +63,7 @@ public final class AppElemRegistration {
 
     private static class AppElemClientRegistration {
 
-        private static void onClientSetup(FMLClientSetupEvent event) {
+        private static void onClientSetup(FMLClientSetupEvent ignoredEvent) {
             AEKeyRendering.register(ElementKeyType.INSTANCE, ElementKey.class, new ElementRenderer());
 
             StorageCells.addCellGuiHandler(new ElementCellGuiHandler());
