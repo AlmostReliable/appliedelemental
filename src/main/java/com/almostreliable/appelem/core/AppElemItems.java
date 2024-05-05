@@ -58,8 +58,8 @@ public final class AppElemItems {
 
     private AppElemItems() {}
 
-    public static Collection<DeferredItem<ElementStorageCell>> getCells() {
-        return Collections.unmodifiableCollection(CELLS);
+    public static List<DeferredItem<ElementStorageCell>> getCells() {
+        return Collections.unmodifiableList(CELLS);
     }
 
     public static Collection<DeferredItem<PortableCellItem>> getPortableCells() {
