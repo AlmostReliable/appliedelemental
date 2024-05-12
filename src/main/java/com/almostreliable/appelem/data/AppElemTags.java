@@ -64,7 +64,7 @@ final class AppElemTags {
 
         @Override
         protected void addTags(HolderLookup.Provider provider) {
-            tag(BlockTags.MINEABLE_WITH_PICKAXE).add(AppElemBlocks.CONTAINER.get());
+            tag(BlockTags.MINEABLE_WITH_PICKAXE).addOptional(AppElemBlocks.CONTAINER.getId());
         }
     }
 }
