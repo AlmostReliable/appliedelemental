@@ -29,6 +29,7 @@ class AppElemModels extends BlockStateProvider {
 
         // cells
         itemModels().basicItem(AppElemItems.ELEMENT_CELL_HOUSING.get());
+        models().singleTexture("element_cell", AppEng.makeId("block/drive/drive_cell"), "cell", AppElem.id("block/element_cell"));
         for (var cell : AppElemItems.getCells()) {
             cell(cell);
         }
@@ -46,8 +47,6 @@ class AppElemModels extends BlockStateProvider {
     }
 
     private void cell(DeferredItem<ElementStorageCell> cell) {
-        String name = cell.get().getTier().namePrefix() + "_element_cell";
-        models().singleTexture(name, AppEng.makeId("block/drive/drive_cell"), "cell", AppElem.id("block/" + name));
         itemModels().basicItem(cell.get()).texture("layer1", AppEng.makeId("item/storage_cell_led"));
     }
 

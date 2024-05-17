@@ -1,5 +1,8 @@
 {
   "values": [
-    "appelem:me_element_container"
+    {
+      "id": "appelem:me_element_container",
+      "required": false
+    }
   ]
 }

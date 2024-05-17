@@ -101,14 +101,10 @@ public final class AppElemRegistration {
         private static void onClientSetup(FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
                 for (var cell : AppElemItems.getCells()) {
-                    String path = cell.getId().getPath();
-                    String tier = path.substring(path.lastIndexOf('_') + 1);
-                    StorageCellModels.registerModel(cell, AppElem.id("block/" + tier + "_element_cell"));
+                    StorageCellModels.registerModel(cell, AppElem.id("block/element_cell"));
                 }
                 for (var portableCell : AppElemItems.getPortableCells()) {
-                    String path = portableCell.getId().getPath();
-                    String tier = path.substring(path.lastIndexOf('_') + 1);
-                    StorageCellModels.registerModel(portableCell, AppElem.id("block/" + tier + "_element_cell"));
+                    StorageCellModels.registerModel(portableCell, AppElem.id("block/element_cell"));
                 }
 
                 AEKeyRendering.register(ElementKeyType.INSTANCE, ElementKey.class, new ElementRenderer());
